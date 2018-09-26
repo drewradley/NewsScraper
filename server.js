@@ -49,20 +49,24 @@ app.get("/scrape", function(req, res) {
   // NOTE: Cheerio selectors function similarly to jQuery's selectors,
   // but be sure to visit the package's npm page to see how it works
   $("a.gs-c-promo-heading").each(function(i, element) {
-    console.log(element)
+   // console.log(element)
     var link = "https://www.bbc.com"+$(element).attr("href");
     var title = $(element).children().text();
+    var summary = $(element).next().text();//.children("p.gs-c-promo-summary").text();
+    console.log(summary);
     result.title = title;
     result.link = link;
+    result.summary = summary;
     // Save these results in an object that we'll push into the results array we defined earlier
     results.push({
       title: title,
-      link: link
+      link: link,
+      summary: summary
     });
     db.Article.create(result)
     .then(function(dbArticle) {
       // View the added result in the console
-      console.log(dbArticle);
+      //console.log(dbArticle);
     })
     .catch(function(err) {
       // If an error occurred, send it to the client
@@ -72,7 +76,7 @@ app.get("/scrape", function(req, res) {
 
   // Log the results once you've looped through each of the elements found with cheerio
   res.send("Scrape Complete");
-  console.log(results);
+  //console.log(results);
   });
   
 });

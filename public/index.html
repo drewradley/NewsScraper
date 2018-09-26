@@ -11,11 +11,17 @@
         margin-right: auto;
         padding-top: 5%;
       }
+      #saved {
+        display: inline-block;
+        overflow: auto;
+        width: 60%;
+        height: 150px;
+      }
       #articles {
         display: inline-block;
         overflow: auto;
         width: 60%;
-        height: 700px;
+        height: 500px;
       }
       #notes {
         float: right;
@@ -42,10 +48,11 @@
       <h1>BBC Scraper</h1>
       <h2><i>Saved scrapings ...</i></h2>
       <div id="saved"></div>
+      <div id="notes"></div>
       <!-- <button type="button" class="btn btn-info">Saved Articles</button> -->
       <h2><i>Scrapings from BBC ...</i></h2>
       <div id="articles"></div>
-      <div id="notes"></div>
+      
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="app.js"></script>

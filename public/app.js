@@ -16,6 +16,7 @@ $.getJSON("/articles", function(data) {
       
       <div class="card-body">
         <h5 class="card-title">${data[i].title}</h5>
+        <h6 >${data[i].summary}</h6>
         <a href="${data[i].link}" target="_blank">${data[i].link}</a><br>
         <a href="#" data-id= ${data[i]._id} class="btn btn-primary">${saveState}</a>
         <a href="#" data-id= ${data[i]._id} class="btn btn-secondary" type="submit">Note</a>
@@ -39,6 +40,7 @@ $.getJSON("/articles", function(data) {
       
       <div class="card-body">
         <h5 class="card-title">${data[i].title}</h5>
+        <h6 >${data[i].summary}</h6>
         <a href="${data[i].link}" target="_blank">${data[i].link}</a><br>
         <a href="#" data-id= ${data[i]._id} class="btn btn-danger">Remove from Saved</a>
         <a href="#" data-id= ${data[i]._id} class="btn btn-secondary" type="submit">Note</a>
