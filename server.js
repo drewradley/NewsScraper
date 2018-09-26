@@ -28,10 +28,11 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
 // Connect to the Mongo DB
-mongoose.connect("mongodb://localhost/newsScraper", { useNewUrlParser: true });
-
+//mongoose.connect("mongodb://localhost/newsScraper", { useNewUrlParser: true });
+var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/newsScraper";
 // Routes
-
+mongoose.Promise = Promise;
+mongoose.connect(MONGODB_URI);
 // A GET route for scraping the echoJS website
 app.get("/scrape", function(req, res) {
   // First, we grab the body of the html with request
