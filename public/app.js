@@ -54,7 +54,7 @@ $.getJSON("/articles", function(data) {
 
 // Whenever someone clicks a p tag
 $(document).on("click", ".btn-secondary", function() {
-  // Empty the notes from the note section
+  console.log("here!")
   $("#notes").empty();
   // Save the id from the p tag
   var thisId = $(this).attr("data-id");

@@ -2,6 +2,7 @@ var express = require("express");
 var bodyParser = require("body-parser");
 //var logger = require("morgan");
 var mongoose = require("mongoose");
+var exphbs = require("express-handlebars");
 
 // Our scraping tools
 // Axios is a promised-based http library, similar to jQuery's Ajax method
@@ -17,7 +18,8 @@ var PORT = (process.env.port || 3000);
 
 // Initialize Express
 var app = express();
-
+app.engine("handlebars", exphbs({ defaultLayout: "main" }));
+app.set("view engine", "handlebars");
 // Configure middleware
 
 // Use morgan logger for logging requests
@@ -33,6 +35,8 @@ var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/newsScraper";
 // Routes
 mongoose.Promise = Promise;
 mongoose.connect(MONGODB_URI);
+var results = [];
+
 // A GET route for scraping the echoJS website
 app.get("/scrape", function(req, res) {
   // First, we grab the body of the html with request
@@ -43,7 +47,6 @@ app.get("/scrape", function(req, res) {
   var $ = cheerio.load(html);
 
   // An empty array to save the data that we'll scrape
-  var results = [];
   var result = {};
 
   // Select each element in the HTML body from which you want information.
@@ -82,6 +85,23 @@ app.get("/scrape", function(req, res) {
   
 });
 
+app.get("/handlebars", function(req, res) {
+  db.Article.find({})
+    .then(function(results) {
+      //console.log(results.length)
+      // If we were able to successfully find Articles, send them back to the client
+      {
+        res.render("allArticles", {
+        results: results
+      });
+    }
+    })
+    .catch(function(err) {
+      // If an error occurred, send it to the client
+      res.json(err);
+    });// console.log(result);
+
+});
 // Route for getting all Articles from the db
 app.get("/articles", function(req, res) {
   // Grab every document in the Articles collection

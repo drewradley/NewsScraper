@@ -1,0 +1,62 @@
+<style media="screen">
+  li {
+    height : 250px;
+    width: 500px;
+    color: white;
+    background-color: white;
+    margin-bottom: 30px;
+    text-align: center;
+  }
+  p{
+    margin-left: 10px;
+     text-align: left;
+  }
+</style>
+<script>
+  $(document).on("click", ".btn-secondary", function() {
+  console.log("here!")
+  })
+  </script>
+<div class="container">
+<h1>Saved Scrapings... </h1>
+
+<ul>
+{{#each results }}
+{{#if saved}}
+<div class="card" style="width: 36rem;">
+  <div class="card-body">
+    <h5 class="card-title">{{title}}</h5>
+    <p class="card-text">{{summary}}</p>
+    <a href="{{link}}" class="btn btn-primary" target="_blank">{{link}}</a>
+    <a href="#" data-id= {{_id}} class="btn btn-secondary" type="submit">Note</a>
+  </div>
+  
+</div>
+  <hr>
+  {{/if}}
+{{/each}}
+
+</ul>
+<h1>Scrapings from BBC... </h1>
+
+<ul>
+{{#each results }}
+{{#unless saved}}
+<div class="card" style="width: 36rem;">
+  <div class="card-body">
+    <h5 class="card-title">{{title}}</h5>
+    <p class="card-text">{{summary}}</p>
+    <a href="{{link}}" class="btn btn-info">{{link}}</a>
+        <a href="#" data-id= {{_id}} class="btn btn-secondary" type="submit">Note</a>
+
+  </div>
+  
+</div>
+  <hr>
+  {{/unless}}
+{{/each}}
+
+</ul>
+
+
+</div>
